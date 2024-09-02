@@ -700,3 +700,17 @@ void net_wlan_remove_netif(void *mac)
 }
 //eof
 
+char wifi_log_buf[1024];
+
+void logbuf_printf(const char *fmt, ...)
+{
+	char buf[128];
+	int len = strlen(wifi_log_buf);
+	if (len >= sizeof(wifi_log_buf) - 1)
+		return;
+	va_list arg;
+	va_start(arg, fmt);
+	vsnprintf(wifi_log_buf + len, sizeof(wifi_log_buf) - 1 - len, fmt, arg);
+	wifi_log_buf[1023] = 0;
+	va_end(arg);
+}
