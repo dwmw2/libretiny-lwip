@@ -83,10 +83,11 @@ typedef int sys_prot_t;
     } while(0)
 #endif
 
-#ifndef LWIP_PLATFORM_DIAG
-#define LWIP_PLATFORM_DIAG(x) do {printf x ;} while(0)
-#endif 
- 
+void logbuf_printf(const char *fmt, ...);
+//#ifndef LWIP_PLATFORM_DIAG
+#define LWIP_PLATFORM_DIAG(x) do { logbuf_printf x;} while(0)
+//#endif 
+
 #define U16_F "4d"
 #define S16_F "4d"
 #define X16_F "4x"
